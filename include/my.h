@@ -75,6 +75,7 @@ int handle_arg(FILE *, char *);
 int my_getnbr(char const *);
 void sig_handler(int, siginfo_t *, void *);
 int run_sig(struct sigaction *);
+int get_enemy_move(player_t *player, char *enemy_map);
 
 static __attribute__((unused)) char const *map_template =
 " |A B C D E F G H\n"

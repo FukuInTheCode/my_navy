@@ -23,6 +23,7 @@ static int print_boards(char *player_map, char *enemy_map)
     write(1, player_map, my_strlen(player_map));
     write(1, "\nenemy navy:\n", 13);
     write(1, enemy_map, my_strlen(enemy_map));
+    write(1, "\n", 1);
     return 0;
 }
 
@@ -30,7 +31,6 @@ static int get_usr_move(player_t *player, char *enemy_map)
 {
     char resp_buf[1001] = {0};
 
-    print_boards(player->player_map, enemy_map);
     read(0, resp_buf, 1000);
     printf("%s\n", resp_buf);
     return 0;
@@ -44,6 +44,17 @@ int get_enemy_move(player_t *player, char *enemy_map)
     return 0;
 }
 
+static int handle_player_one(player_t *player, char *enemy_map)
+{
+    if (player->wstatus != WAITING_PLAYER2)
+        return 0;
+    for (write(1, "waiting for enemy...\n\n", 23)
+        ;player->wstatus == WAITING_PLAYER2;);
+    write(1, "enemy connected\n\n", 17);
+    print_boards(player->player_map, enemy_map);
+    return 0;
+}
+
 int game_loop(player_t *player)
 {
     int error = print_pid(player->pid);
@@ -52,15 +63,13 @@ int game_loop(player_t *player)
     if (!enemy_map)
         return 84;
     player_stock(SAVE, player);
-    if (player->wstatus == WAITING_PLAYER2)
-        for (write(1, "waiting for enemy...", 22)
-            ;player->wstatus == WAITING_PLAYER2;);
-    write(1, "enemy connected\n\n", 17);
+    handle_player_one(player, enemy_map);
+    for (; player->wstatus == WAITING_PLAYER1;);
     if (player->wstatus == WAITING_USER)
         error |= get_usr_move(player, enemy_map);
-    for (; player->wstatus == WAITING_CONF;);
     if (player->wstatus == WAITING_MOVE) {
-        write(1, "successfully connected to enemy\n", 32);
+        write(1, "successfully connected to enemy\n\n", 33);
+        print_boards(player->player_map, enemy_map);
         error |= get_enemy_move(player, enemy_map);
     }
     free(enemy_map);

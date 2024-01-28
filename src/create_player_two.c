@@ -21,7 +21,7 @@ int create_joining_player(char *pid_s, char *file_path)
     FILE *fd = fopen(file_path, "r");
     char *player_map = my_strdup(map_template);
     int error = 0;
-    player_t player = {WAITING_PLAYER2, player_map, getpid(),
+    player_t player = {WAITING_PLAYER1, player_map, getpid(),
         handle_gid_s(pid_s), 0, 0};
     struct sigaction sa = {.sa_sigaction = sig_handler, .sa_flags = SIGIN};
 
