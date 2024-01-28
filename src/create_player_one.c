@@ -74,12 +74,16 @@ int create_creating_player(char *file_path)
 {
     FILE *fd = fopen(file_path, "r");
     char *player_map = my_strdup(map_template);
+    int error = 0;
+    player_t player = {WAITING_PLAYER, player_map, getpid(), -1, 0, 0};
 
     if (!fd || !player_map)
         return 84;
     if (handle_arg(fd, player_map))
-        return 84;
-    start(player_map, WAITING_PLAYER, getpid());
+        error |= 84;
+    if (!error)
+        error |= game²_loop(&player_map);
+    free(player_map);
     fclose(fd);
-    return 0;
+    return error;
 }

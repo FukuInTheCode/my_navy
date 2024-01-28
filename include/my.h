@@ -38,15 +38,33 @@
 typedef enum wait_status_e {
     WAITING_PLAYER,
     WAITING_USER,
-    WAITING_MOVe
+    WAITING_MOVE
 } wait_status_t;
+
+typedef enum op_e {
+    ADD,
+    RESET,
+    INIT,
+    ENEMY,
+} op_t;
+
+typedef struct player_s {
+    wait_status_t wstatus;
+    char *player_map;
+    gid_t pid;
+    gid_t enemy_pid;
+    int response;
+    int bit_count;
+} player_t;
 
 int set_map(int, int, char *, char);
 char get_map(int, int, char *);
 int create_creating_player(char *);
 int my_strlen(char const *);
+int my_put_nbr(int nb);
 char *my_strdup(char const *);
 char *my_strcpy(char *, char const *);
+int game_loop(player_t *);
 
 static __attribute__((unused)) char const *map_template =
 " |A B C D E F G H\n"
