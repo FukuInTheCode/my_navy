@@ -29,7 +29,6 @@ static int print_boards(char *player_map, char *enemy_map)
 
 static int get_response(player_t *player, char *enemy_map, char *resp_buf)
 {
-
     return 0;
 }
 
@@ -74,7 +73,7 @@ static int handle_player_one(player_t *player, char *enemy_map)
     if (player->wstatus != WAITING_PLAYER2)
         return 0;
     for (write(1, "waiting for enemy...\n\n", 23)
-        ;player->wstatus == WAITING_PLAYER2;);
+        ; player->wstatus == WAITING_PLAYER2;);
     write(1, "enemy connected\n\n", 17);
     print_boards(player->player_map, enemy_map);
     return 0;
