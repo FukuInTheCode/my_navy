@@ -66,7 +66,7 @@ char get_map(int, int, char *);
 int create_creating_player(char *);
 int create_joining_player(char *, char *);
 int my_strlen(char const *);
-int my_put_nbr(int nb);
+int my_put_nbr(int);
 char *my_strdup(char const *);
 char *my_strcpy(char *, char const *);
 int game_loop(player_t *);
@@ -75,7 +75,7 @@ int handle_arg(FILE *, char *);
 int my_getnbr(char const *);
 void sig_handler(int, siginfo_t *, void *);
 int run_sig(struct sigaction *);
-int get_enemy_move(player_t *player, char *enemy_map);
+int get_enemy_move(player_t *, char *, uint32_t);
 
 static __attribute__((unused)) char const *map_template =
 " |A B C D E F G H\n"

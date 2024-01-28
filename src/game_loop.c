@@ -43,7 +43,8 @@ static int get_usr_move(player_t *player, char *enemy_map, uint32_t turn_count)
     write(1, "\n\n", 2);
     turn_count++;
     !(turn_count % 2) && print_boards(player->player_map, enemy_map);
-    return 0;
+    player->wstatus = WAITING_MOVE;
+    return get_enemy_move(player, enemy_map, turn_count);
 }
 
 int get_enemy_move(player_t *player, char *enemy_map, uint32_t turn_count)
@@ -56,7 +57,8 @@ int get_enemy_move(player_t *player, char *enemy_map, uint32_t turn_count)
     write(1, "\n\n", 2);
     turn_count++;
     !(turn_count % 2) && print_boards(player->player_map, enemy_map);
-    return 0;
+    player->wstatus = WAITING_USER;
+    return get_usr_move(player, enemy_map, turn_count);
 }
 
 static int handle_player_one(player_t *player, char *enemy_map)
