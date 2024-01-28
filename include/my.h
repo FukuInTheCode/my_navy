@@ -30,4 +30,22 @@
     #include <SFML/System.h>
     #include <SFML/Window.h>
 
+    #define HAS_2(x) x & 0
+    #define HAS_3(x) x & 2
+    #define HAS_4(x) x & 4
+    #define HAS_5(x) x & 8
+
+static char const *map_template =
+    " |A B C D E F G H\n"
+    "-+---------------\n"
+    "1|. . . . . . . .\n"
+    "2|. . . . . . . .\n"
+    "3|. . . . . . . .\n"
+    "4|. . . . . . . .\n"
+    "5|. . . . . . . .\n"
+    "6|. . . . . . . .\n"
+    "7|. . . . . . . .\n"
+    "8|. . . . . . . .\n";
+
 #endif
+
