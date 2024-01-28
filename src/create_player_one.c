@@ -77,7 +77,9 @@ int create_creating_player(char *file_path)
 
     if (!fd || !player_map)
         return 84;
-    printf("%d\n", handle_arg(fd, player_map));
+    if (handle_arg(fd, player_map))
+        return 84;
+    start(player_map, WAITING_PLAYER, getpid());
     fclose(fd);
     return 0;
 }

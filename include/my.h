@@ -35,6 +35,12 @@
     #define HAS_4(x) x & 4
     #define HAS_5(x) x & 8
 
+typedef enum wait_status_e {
+    WAITING_PLAYER,
+    WAITING_USER,
+    WAITING_MOVe
+} wait_status_t;
+
 int set_map(int, int, char *, char);
 char get_map(int, int, char *);
 int create_creating_player(char *);
