@@ -12,7 +12,7 @@ static int place_boat(int coords[2], char *player_map, size_t size, int d)
     int error = 0;
     char c = 0;
 
-    for (int i = coords[d]; !error &&  coords[d] - i < size; coords[d]++) {
+    for (int i = coords[d]; !error && coords[d] - i < size; coords[d]++) {
         c = get_map(*coords, coords[1], player_map);
         error |= 84 * (c != '.');
         error |= set_map(*coords, coords[1], player_map, size + '0');
@@ -33,7 +33,7 @@ static int handle_line(char *line, char *player_map, uint8_t *current_boat)
     if (my_strlen(line) != 7 || !('2' <= *line && *line <= '5')
         || line[1] != ':' || (HAS_2(*current_boat) && *line == '2') ||
         (HAS_3(*current_boat) && *line == '3') ||
-        (HAS_4(*current_boat) && *line== '4') ||
+        (HAS_4(*current_boat) && *line == '4') ||
         (HAS_5(*current_boat) && *line == '5') ||
         (line[2] != line[5] && line[3] != line[6]) ||
         (line[2] == line[5] && line[3] == line[6]) ||
@@ -44,7 +44,7 @@ static int handle_line(char *line, char *player_map, uint8_t *current_boat)
         (line[2] != line[5] && my_abs(line[2] - line[5]) != *line - '0' - 1) ||
         (line[3] != line[6] && my_abs(line[3] - line[6]) != *line - '0' - 1))
         return 84;
-    place_boat((int [2]){line[2] - 'A', line[3] - '1'},
+    place_boat((int[2]){line[2] - 'A', line[3] - '1'},
         player_map, *line - '0', line[2] == line[5]);
     return 0;
 }
