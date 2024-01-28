@@ -27,6 +27,26 @@ static int print_boards(char *player_map, char *enemy_map)
     return 0;
 }
 
+int is_end(char *player_map, char *enemy_map)
+{
+    uint32_t count = 0;
+
+    for (int i = 0; player_map[i]; i++)
+        count += player_map[i] == 'x';
+    if (count == 14) {
+        free(enemy_map);
+        return 1 + 0 * write(1, "Enemy won", 9);
+    }
+    count = 0;
+    for (int i = 0; enemy_map[i]; i++)
+        count += enemy_map[i] == 'x';
+    if (count == 14) {
+        free(enemy_map);
+        return 1 + 0 * write(1, "I won", 5);
+    }
+    return 0;
+}
+
 static int get_response(player_t *player, char *enemy_map, char *resp_buf)
 {
     int x = *resp_buf - 'A';
@@ -63,6 +83,8 @@ static int get_usr_move(player_t *player, char *enemy_map, uint32_t turn_count)
     turn_count++;
     !(turn_count % 2) && print_boards(player->player_map, enemy_map);
     player->wstatus = WAITING_MOVE;
+    if (is_end(player->player_map, enemy_map))
+        return 0;
     return get_enemy_move(player, enemy_map, turn_count);
 }
 
@@ -97,6 +119,8 @@ int get_enemy_move(player_t *player, char *enemy_map, uint32_t turn_count)
     turn_count++;
     !(turn_count % 2) && print_boards(player->player_map, enemy_map);
     player->wstatus = WAITING_USER;
+    if (is_end(player->player_map, enemy_map))
+        return 0;
     return get_usr_move(player, enemy_map, turn_count);
 }
 
@@ -123,12 +147,11 @@ int game_loop(player_t *player)
     handle_player_one(player, enemy_map);
     for (; player->wstatus == WAITING_PLAYER1;);
     if (player->wstatus == WAITING_USER)
-        error |= get_usr_move(player, enemy_map, turn_count);
+        return get_usr_move(player, enemy_map, turn_count);
     if (player->wstatus == WAITING_MOVE) {
         write(1, "successfully connected to enemy\n\n", 33);
         print_boards(player->player_map, enemy_map);
-        error |= get_enemy_move(player, enemy_map, turn_count);
+        return get_enemy_move(player, enemy_map, turn_count);
     }
-    free(enemy_map);
     return error;
 }
