@@ -31,12 +31,15 @@ static int get_response(player_t *player, char *enemy_map, char *resp_buf)
 {
     int x = *resp_buf - 'A';
     int y = resp_buf[1] - '1';
+    char c = 'x';
 
     send_resp(player->enemy_pid, x * 8 + y);
     player->bit_count = 0;
     player->response = 0;
     for (; player->bit_count < 32;);
-    set_map(x, y, enemy_map, player->response ? 'x' : 'o');
+    if (!player->response && get_map(x, y, enemy_map) != 'x')
+        c = 'o';
+    set_map(x, y, enemy_map, c);
     if (!player->response)
         return 0 * write(1, "missed\n\n", 8);
     return 0 * write(1, "hit\n\n", 5);
