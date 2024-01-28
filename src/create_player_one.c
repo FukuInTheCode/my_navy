@@ -13,13 +13,17 @@ int create_creating_player(char *file_path)
     char *player_map = my_strdup(map_template);
     int error = 0;
     player_t player = {WAITING_PLAYER, player_map, getpid(), -1, 0, 0};
+    struct sigaction sa = {.sa_sigaction = sig_handler, .sa_flags = SIGIN};
 
     if (!fd || !player_map)
         return 84;
     if (handle_arg(fd, player_map))
         error |= 84;
-    if (!error)
+    if (!error) {
+        sigemptyset(&sa.sa_mask);
+        run_sig(&sa);
         error |= game_loop(&player);
+    }
     free(player_map);
     fclose(fd);
     return error;

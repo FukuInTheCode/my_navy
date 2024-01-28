@@ -6,9 +6,8 @@
 */
 
 #include "my.h"
-#include <signal.h>
 
-int run_sig(struct sa_sigaction *sa)
+int run_sig(struct sigaction *sa)
 {
     sigaction(SIGUSR1, sa, NULL);
     sigaction(SIGUSR2, sa, NULL);

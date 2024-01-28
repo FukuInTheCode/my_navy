@@ -8,7 +8,7 @@
 #ifndef MY_H
     #define MY_H
     #include <bits/types/siginfo_t.h>
-#include <stdio.h>
+    #include <stdio.h>
     #include <unistd.h>
     #include <stdint.h>
     #include <time.h>
@@ -36,6 +36,7 @@
     #define HAS_4(x) x & 4
     #define HAS_5(x) x & 8
 
+    #define SIGIN SA_SIGINFO
     #define GETNBR_CHECK (is_int_stred(str[i]) || is_sign_stred(str[i]))
 
 typedef enum wait_status_e {

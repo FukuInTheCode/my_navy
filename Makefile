@@ -5,7 +5,7 @@
 ## Placeholder
 ##
 
-NAME   = navy
+NAME   = my_navy
 
 CC	   = gcc
 
