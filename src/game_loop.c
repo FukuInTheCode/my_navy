@@ -29,10 +29,14 @@ static int print_boards(char *player_map, char *enemy_map)
 
 static int get_response(player_t *player, char *enemy_map, char *resp_buf)
 {
-    send_resp(player->enemy_pid, (*resp_buf - 'A') * 8 + resp_buf[1] - 49);
+    int x = *resp_buf - 'A';
+    int y = resp_buf[1] - '1';
+
+    send_resp(player->enemy_pid, x * 8 + y);
     player->bit_count = 0;
     player->response = 0;
     for (; player->bit_count < 32;);
+    set_map(x, y, enemy_map, player->response ? 'x' : 'o');
     if (!player->response)
         return 0 * write(1, "missed\n\n", 7);
     return 0 * write(1, "hit\n\n", 5);
@@ -61,11 +65,19 @@ static int get_usr_move(player_t *player, char *enemy_map, uint32_t turn_count)
 
 int get_enemy_move(player_t *player, char *enemy_map, uint32_t turn_count)
 {
+    char c = 0;
+
     write(1, "waiting for enemy's attack...\n\n", 31);
     player->bit_count = 0;
     for (player->response = 0; player->bit_count < 32;);
     write(1, "result: ", 8);
-    send_resp(player->enemy_pid, 1);
+    c = get_map(player->response / 8, player->response % 8,
+        player->player_map);
+    if (!c)
+        return 84;
+    set_map(player->response / 8, player->response % 8, player->player_map,
+        ('2' <= c && c <= '5') ? 'x' : 'o');
+    send_resp(player->enemy_pid, '2' <= c && c <= '5');
     write(1, "\n\n", 2);
     turn_count++;
     !(turn_count % 2) && print_boards(player->player_map, enemy_map);
