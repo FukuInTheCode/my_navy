@@ -31,7 +31,8 @@ static int get_response(player_t *player, char *enemy_map, char *resp_buf)
 {
     send_resp(player->enemy_pid, (*resp_buf - 'A') * 8 + resp_buf[1] - 49);
     player->bit_count = 0;
-    for (player->response = 0; player->bit_count < 32;);
+    player->response = 0;
+    for (; player->bit_count < 32;);
     if (!player->response)
         return 0 * write(1, "missed\n\n", 7);
     return 0 * write(1, "hit\n\n", 5);
@@ -64,7 +65,6 @@ int get_enemy_move(player_t *player, char *enemy_map, uint32_t turn_count)
     player->bit_count = 0;
     for (player->response = 0; player->bit_count < 32;);
     write(1, "result: ", 8);
-    printf("%d, %d\n", player->response / 8, player->response % 8);
     send_resp(player->enemy_pid, 1);
     write(1, "\n\n", 2);
     turn_count++;
@@ -94,7 +94,7 @@ int game_loop(player_t *player)
         return 84;
     player_stock(SAVE, player);
     handle_player_one(player, enemy_map);
-    for (; player->wstatus == WAITING_PLAYER1; printf("gg\n"));
+    for (; player->wstatus == WAITING_PLAYER1;);
     if (player->wstatus == WAITING_USER)
         error |= get_usr_move(player, enemy_map, turn_count);
     if (player->wstatus == WAITING_MOVE) {

@@ -12,6 +12,7 @@ int send_resp(gid_t pid, int response)
 {
     uint8_t bit = 0;
 
+    usleep(1e6);
     for (int i = 0; i < 32; i++) {
         bit = response & (1 << i);
         kill(pid, bit != 0 ? SIGUSR2 : SIGUSR1);

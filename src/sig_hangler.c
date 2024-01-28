@@ -37,7 +37,6 @@ void sig_handler(int sig, siginfo_t *info, void *context)
         return connect_player_two(player, info->si_pid);
     if (player->wstatus != WAITING_USER && player->wstatus != WAITING_MOVE)
         return;
-    player->response = player->response;
     player->response |= (sig == SIGUSR2) << player->bit_count;
     player->bit_count++;
 }
