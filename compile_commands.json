@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./include/",
+      "-Wall",
+      "-Wextra",
+      "-Wno-unused-value",
+      "-Wno-sign-compare",
+      "-Wno-unused-parameter",
+      "-o",
+      "obj/create_player_one.o",
+      "src/create_player_one.c"
+    ],
+    "directory": "/home/fukumi/epi/PSU/100/my_navy",
+    "file": "/home/fukumi/epi/PSU/100/my_navy/src/create_player_one.c",
+    "output": "/home/fukumi/epi/PSU/100/my_navy/obj/create_player_one.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./include/",
+      "-Wall",
+      "-Wextra",
+      "-Wno-unused-value",
+      "-Wno-sign-compare",
+      "-Wno-unused-parameter",
+      "-o",
+      "obj/my_strdup.o",
+      "src/my_strdup.c"
+    ],
+    "directory": "/home/fukumi/epi/PSU/100/my_navy",
+    "file": "/home/fukumi/epi/PSU/100/my_navy/src/my_strdup.c",
+    "output": "/home/fukumi/epi/PSU/100/my_navy/obj/my_strdup.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./include/",
+      "-Wall",
+      "-Wextra",
+      "-Wno-unused-value",
+      "-Wno-sign-compare",
+      "-Wno-unused-parameter",
+      "-o",
+      "obj/my_strcpy.o",
+      "src/my_strcpy.c"
+    ],
+    "directory": "/home/fukumi/epi/PSU/100/my_navy",
+    "file": "/home/fukumi/epi/PSU/100/my_navy/src/my_strcpy.c",
+    "output": "/home/fukumi/epi/PSU/100/my_navy/obj/my_strcpy.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./include/",
+      "-Wall",
+      "-Wextra",
+      "-Wno-unused-value",
+      "-Wno-sign-compare",
+      "-Wno-unused-parameter",
+      "-o",
+      "obj/my_strlen.o",
+      "src/my_strlen.c"
+    ],
+    "directory": "/home/fukumi/epi/PSU/100/my_navy",
+    "file": "/home/fukumi/epi/PSU/100/my_navy/src/my_strlen.c",
+    "output": "/home/fukumi/epi/PSU/100/my_navy/obj/my_strlen.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./include/",
+      "-Wall",
+      "-Wextra",
+      "-Wno-unused-value",
+      "-Wno-sign-compare",
+      "-Wno-unused-parameter",
+      "-o",
+      "obj/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/fukumi/epi/PSU/100/my_navy",
+    "file": "/home/fukumi/epi/PSU/100/my_navy/src/main.c",
+    "output": "/home/fukumi/epi/PSU/100/my_navy/obj/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./include/",
+      "-Wall",
+      "-Wextra",
+      "-Wno-unused-value",
+      "-Wno-sign-compare",
+      "-Wno-unused-parameter",
+      "-o",
+      "obj/set_map.o",
+      "src/set_map.c"
+    ],
+    "directory": "/home/fukumi/epi/PSU/100/my_navy",
+    "file": "/home/fukumi/epi/PSU/100/my_navy/src/set_map.c",
+    "output": "/home/fukumi/epi/PSU/100/my_navy/obj/set_map.o"
+  }
+]

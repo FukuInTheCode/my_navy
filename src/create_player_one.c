@@ -7,6 +7,19 @@
 
 #include "my.h"
 
+static int place_boat(int coords[2], char *player_map, size_t size, int d)
+{
+    int error = 0;
+    char c = 0;
+
+    for (int i = 0; !error && i < size; coords[d]++) {
+        c = get_map(*coords, coords[1], player_map);
+        error |= 84 * (c != '.');
+        error |= set_map(*coords, coords[1], player_map, c);
+    }
+    return 0;
+}
+
 static int handle_line(char *line, char *player_map, uint8_t *current_boat)
 {
     uint8_t size = 0;
@@ -18,9 +31,14 @@ static int handle_line(char *line, char *player_map, uint8_t *current_boat)
         (HAS_4(*current_boat) && *line== '4') ||
         (HAS_5(*current_boat) && *line == '5') ||
         (line[2] != line[5] && line[3] != line[6]) ||
-        (line[2] == line[5] && line[3] == line[6]))
+        (line[2] == line[5] && line[3] == line[6]) ||
+        !('A' <= line[2] && line[2] <= 'H') ||
+        !('A' <= line[5] && line[5] <= 'H') ||
+        !('1' <= line[3] && line[3] <= '8') ||
+        !('1' <= line[6] && line[6] <= '8'))
         return 84;
     size = *line - '0';
+    place_boat((int [2]){line[2] - 'A'})
     return 0;
 }
 

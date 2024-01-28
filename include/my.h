@@ -35,7 +35,8 @@
     #define HAS_4(x) x & 4
     #define HAS_5(x) x & 8
 
-int set_map(int, int, char*, char);
+int set_map(int, int, char *, char);
+char get_map(int, int, char *);
 int create_creating_player(char *);
 int my_strlen(char const *);
 char *my_strdup(char const *);
