@@ -1,0 +1,20 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/gcc",
+      "-c",
+      "-I./include/",
+      "-Wall",
+      "-Wextra",
+      "-Wno-unused-value",
+      "-Wno-sign-compare",
+      "-Wno-unused-parameter",
+      "-o",
+      "obj/create_player_one.o",
+      "src/create_player_one.c"
+    ],
+    "directory": "/home/fukumi/epi/PSU/100/my_navy",
+    "file": "/home/fukumi/epi/PSU/100/my_navy/src/create_player_one.c",
+    "output": "/home/fukumi/epi/PSU/100/my_navy/obj/create_player_one.o"
+  }
+]
