@@ -77,6 +77,7 @@ void sig_handler(int, siginfo_t *, void *);
 int run_sig(struct sigaction *);
 int get_enemy_move(player_t *, char *, uint32_t);
 int send_resp(gid_t, int);
+int my_putchar(char);
 
 static __attribute__((unused)) char const *map_template =
 " |A B C D E F G H\n"
