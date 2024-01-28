@@ -33,8 +33,11 @@ static int get_usr_move(player_t *player, char *enemy_map, uint32_t turn_count)
 
     read(0, resp_buf, 1000);
     write(1, "result: ", 8);
-    if (my_strlen(resp_buf) != 2)
-        return 84;
+    if (my_strlen(resp_buf) != 2){
+        memset((void *)resp_buf, 0, 1001);
+        write(1, "wrong position\n\n", 16);
+        return get_usr_move(player, enemy_map, turn_count);
+    }
     resp_buf[2] = ':';
     write(1, resp_buf, 3);
     write(1, "\n\n", 2);
