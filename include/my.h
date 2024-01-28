@@ -42,7 +42,8 @@
 typedef enum wait_status_e {
     WAITING_PLAYER,
     WAITING_USER,
-    WAITING_MOVE
+    WAITING_MOVE,
+    WAITING_RESPONSE,
 } wait_status_t;
 
 typedef enum op_e {
@@ -72,6 +73,7 @@ player_t *player_stock(op_t, player_t *);
 int handle_arg(FILE *, char *);
 int my_getnbr(char const *);
 void sig_handler(int, siginfo_t *, void *);
+int run_sig(struct sigaction *);
 
 static __attribute__((unused)) char const *map_template =
 " |A B C D E F G H\n"
