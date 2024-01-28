@@ -21,6 +21,6 @@ int game_loop(player_t *player)
 {
     int error = print_pid(player->pid);
 
-    sig_interpretor(INIT, player, 0);
+    player_stock(SAVE, player);
     return error;
 }

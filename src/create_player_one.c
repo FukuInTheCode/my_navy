@@ -82,7 +82,7 @@ int create_creating_player(char *file_path)
     if (handle_arg(fd, player_map))
         error |= 84;
     if (!error)
-        error |= game²_loop(&player_map);
+        error |= game_loop(&player_map);
     free(player_map);
     fclose(fd);
     return error;

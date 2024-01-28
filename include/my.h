@@ -42,10 +42,8 @@ typedef enum wait_status_e {
 } wait_status_t;
 
 typedef enum op_e {
-    ADD,
-    RESET,
-    INIT,
-    ENEMY,
+    SAVE,
+    GET,
 } op_t;
 
 typedef struct player_s {

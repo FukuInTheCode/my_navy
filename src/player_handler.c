@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-player_t *player_stock(op_t op, player_t *player)
+player_t *player_stocker(op_t op, player_t *player)
 {
     static player_t *ply = NULL;
 
