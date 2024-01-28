@@ -27,7 +27,6 @@ static int my_abs(int x)
     return x;
 }
 
-
 static int save_boat(int size, uint8_t *current_boat)
 {
     int bit = 1 << size;

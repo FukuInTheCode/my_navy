@@ -77,8 +77,8 @@ int handle_resp(player_t *player, char *enemy_map)
     my_putchar(player->response / 8 + 'A');
     my_putchar(player->response % 8 + '1');
     my_putchar(':');
-    write(1,  !('2' <= c && c <= '5') ? "missed\n\n" : "hit\n\n", 5 +
-          !('2' <= c && c <= '5') * 3);
+    write(1, !('2' <= c && c <= '5') ? "missed\n\n" : "hit\n\n", 5 +
+        !('2' <= c && c <= '5') * 3);
     return 0;
 }
 
