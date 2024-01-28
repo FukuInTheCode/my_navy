@@ -52,8 +52,9 @@ int game_loop(player_t *player)
     if (!enemy_map)
         return 84;
     player_stock(SAVE, player);
-    for (write(1, "waiting for enemy...\n\n", 22);
-        player->wstatus == WAITING_PLAYER;);
+    if (player->wstatus == WAITING_PLAYER2)
+        for (write(1, "waiting for enemy...", 22)
+            ;player->wstatus == WAITING_PLAYER2;);
     write(1, "enemy connected\n\n", 17);
     if (player->wstatus == WAITING_USER)
         error |= get_usr_move(player, enemy_map);

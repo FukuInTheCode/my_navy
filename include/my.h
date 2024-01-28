@@ -40,7 +40,8 @@
     #define GETNBR_CHECK (is_int_stred(str[i]) || is_sign_stred(str[i]))
 
 typedef enum wait_status_e {
-    WAITING_PLAYER,
+    WAITING_PLAYER1,
+    WAITING_PLAYER2,
     WAITING_USER,
     WAITING_MOVE,
     WAITING_RESPONSE,
