@@ -69,19 +69,20 @@ static int get_usr_move(player_t *player, char *enemy_map, uint32_t turn_count)
 int handle_resp(player_t *player, char *enemy_map)
 {
     char c = 0;
+    bool status = 0;
 
     c = get_map(player->response / 8, player->response % 8,
         player->player_map);
     if (!c)
         return 84;
-    set_map(player->response / 8, player->response % 8, player->player_map,
-        ('2' <= c && c <= '5') ? 'x' : 'o');
-    send_resp(player->enemy_pid, '2' <= c && c <= '5');
+    status = '2' <= c && c <= '5';
+    c = (status || c == 'x') ? 'x' : 'o';
+    set_map(player->response / 8, player->response % 8, player->player_map, c);
+    send_resp(player->enemy_pid, status);
     my_putchar(player->response / 8 + 'A');
     my_putchar(player->response % 8 + '1');
     my_putchar(':');
-    write(1, !('2' <= c && c <= '5') ? "missed\n\n" : "hit\n\n", 5 +
-        !('2' <= c && c <= '5') * 3);
+    write(1, !status ? "missed\n\n" : "hit\n\n", 5 + !status * 3);
     return 0;
 }
 
