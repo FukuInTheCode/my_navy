@@ -27,6 +27,15 @@ static int my_abs(int x)
     return x;
 }
 
+
+static int save_boat(int size, uint8_t *current_boat)
+{
+    int bit = 1 << size;
+
+    *current_boat |= bit;
+    return 0;
+}
+
 static int handle_line(char *line, char *player_map, uint8_t *current_boat)
 {
     line[my_strlen(line) - 1] *= (line[my_strlen(line) - 1] != '\n');
@@ -44,6 +53,7 @@ static int handle_line(char *line, char *player_map, uint8_t *current_boat)
         (line[2] != line[5] && my_abs(line[2] - line[5]) != *line - '0' - 1) ||
         (line[3] != line[6] && my_abs(line[3] - line[6]) != *line - '0' - 1))
         return 84;
+    save_boat(*line - '2', current_boat);
     place_boat((int[2]){line[2] - 'A', line[3] - '1'},
         player_map, *line - '0', line[2] == line[5]);
     return 0;
@@ -67,5 +77,6 @@ int handle_arg(FILE *fd, char *player_map)
         return 84;
     for (; !error && getline(&line, &line_n, fd) >= 0;)
         error |= handle_line(line, player_map, &current_boat) + free_l(&line);
+    error |= 84 * (current_boat != 1 + 2 + 4 + 8);
     return error;
 }

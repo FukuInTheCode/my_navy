@@ -31,7 +31,7 @@
     #include <SFML/System.h>
     #include <SFML/Window.h>
 
-    #define HAS_2(x) x & 0
+    #define HAS_2(x) x & 1
     #define HAS_3(x) x & 2
     #define HAS_4(x) x & 4
     #define HAS_5(x) x & 8
@@ -76,6 +76,7 @@ int my_getnbr(char const *);
 void sig_handler(int, siginfo_t *, void *);
 int run_sig(struct sigaction *);
 int get_enemy_move(player_t *, char *, uint32_t);
+int send_resp(gid_t, int);
 
 static __attribute__((unused)) char const *map_template =
 " |A B C D E F G H\n"
