@@ -27,19 +27,27 @@ static int print_boards(char *player_map, char *enemy_map)
     return 0;
 }
 
+static int get_response(player_t *player, char *enemy_map, char *resp_buf)
+{
+
+    return 0;
+}
+
 static int get_usr_move(player_t *player, char *enemy_map, uint32_t turn_count)
 {
-    char resp_buf[1001] = {0};
+    char resp_buf[100001] = {0};
 
-    read(0, resp_buf, 1000);
+    write(1, "attack: ", 8) && read(0, resp_buf, 1000) && write(1, "\n", 1);
     write(1, "result: ", 8);
-    if (my_strlen(resp_buf) != 2){
-        memset((void *)resp_buf, 0, 1001);
+    if (my_strlen(resp_buf) != 3 &&
+        !get_map(*resp_buf - 'A', resp_buf[1] - '1', enemy_map)){
+        memset((void *)resp_buf, 0, my_strlen(resp_buf));
         write(1, "wrong position\n\n", 16);
         return get_usr_move(player, enemy_map, turn_count);
     }
     resp_buf[2] = ':';
     write(1, resp_buf, 3);
+    get_response(player, enemy_map, resp_buf);
     write(1, "\n\n", 2);
     turn_count++;
     !(turn_count % 2) && print_boards(player->player_map, enemy_map);
