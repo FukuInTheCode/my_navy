@@ -7,7 +7,8 @@
 
 #ifndef MY_H
     #define MY_H
-    #include <stdio.h>
+    #include <bits/types/siginfo_t.h>
+#include <stdio.h>
     #include <unistd.h>
     #include <stdint.h>
     #include <time.h>
@@ -35,6 +36,8 @@
     #define HAS_4(x) x & 4
     #define HAS_5(x) x & 8
 
+    #define GETNBR_CHECK (is_int_stred(str[i]) || is_sign_stred(str[i]))
+
 typedef enum wait_status_e {
     WAITING_PLAYER,
     WAITING_USER,
@@ -58,11 +61,16 @@ typedef struct player_s {
 int set_map(int, int, char *, char);
 char get_map(int, int, char *);
 int create_creating_player(char *);
+int create_joining_player(char *, char *);
 int my_strlen(char const *);
 int my_put_nbr(int nb);
 char *my_strdup(char const *);
 char *my_strcpy(char *, char const *);
 int game_loop(player_t *);
+player_t *player_stock(op_t, player_t *);
+int handle_arg(FILE *, char *);
+int my_getnbr(char const *);
+void sig_handler(int, siginfo_t *, void *);
 
 static __attribute__((unused)) char const *map_template =
 " |A B C D E F G H\n"

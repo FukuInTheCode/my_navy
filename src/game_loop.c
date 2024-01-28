@@ -22,5 +22,7 @@ int game_loop(player_t *player)
     int error = print_pid(player->pid);
 
     player_stock(SAVE, player);
+    for (; player->wstatus == WAITING_PLAYER;);
+    printf("%d\n", player->enemy_pid);
     return error;
 }

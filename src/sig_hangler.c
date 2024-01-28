@@ -20,7 +20,7 @@ static int connect_players(player_t *player, gid_t pid)
     return 0;
 }
 
-int sig_handler(int sig, siginfo_t *info, void *context)
+void sig_handler(int sig, siginfo_t *info, void *context)
 {
     player_t *player = player_stock(GET, NULL);
 
